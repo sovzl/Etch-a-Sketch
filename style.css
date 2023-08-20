@@ -1,28 +1,50 @@
-body { 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-#boxArea {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    flex-basis: 350px;
-    flex-wrap: wrap;
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.box-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px; /* Set a fixed width for the container */
+  height: 600px; /* Set a fixed height for the container */
+  border: 1px solid black;
 }
 
 .box {
-    width: 50px;
-    height: 50px;
-    background-color: red;
+  flex: 0 0 calc(100% / var(--columns));
+  height: calc(100% / var(--columns));
+  box-sizing: border-box;
+  border: 1px solid black;
 }
 
-.setsize>button {
-    height: 30px;
-    width: 70px;
-    font-size: 16px;
+.options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#resize {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.colorpick {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
 }

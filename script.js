@@ -1,26 +1,96 @@
-const boxArea = document.getElementById('boxArea')
+const resetButton = document.getElementById('resetButton')
+const slider = document.querySelector('.slider')
+const gridSizeLabel = document.getElementById('num')
+const gridArea = document.getElementById('gridArea')
+const rainbowButton = document.getElementById('rainbow')
+const darkenButton = document.getElementById('darken')
+const colorPickerButton = document.getElementById('colorPicker')
 
- 
+ let currentMode = colorPicker;
 
-function createBoxes (16)
+ slider.addEventListener('input', () => {
+  const gridSize = parseInt(slider.value);
+  gridSizeLabel.textContent = gridSize;
+  gridArea.style.setProperty('--columns', gridSize); // Update the --columns custom property
+  createGrid(gridSize);
+});
 
-
-
-
-for (let i = 0; i < 49; i++) {
-    const newBox = document.createElement('div');
-    newBox.classList.add('box');
-    boxArea.appendChild(newBox);
-
-    newBox.addEventListener("mouseover", () => {
-        // Call your colorBox function here and pass newBox as an argument
-        colorBox(newBox);
-    });
+function createGrid(gridSize) {
+  gridArea.innerHTML = '';
+  for (let i = 0; i < gridSize * gridSize; i++){
+    const box = document.createElement('div');
+    box.classList.add('box')
+    gridArea.appendChild(box)
+    box.addEventListener('mouseenter', () => {
+      currentMode(box)
+    })
+  }
 }
 
 
 
-function colorBox (newBox) {
-        newBox.style.backgroundColor = "blue";
+colorPickerButton.addEventListener('change', () => {
+  currentMode = colorPicker;
+  resetOpacity();
+
+});
+
+function colorPicker(box) {
+  box.style.backgroundColor = colorPickerButton.value;
+  resetOpacity();
 }
 
+resetButton.addEventListener('click', resetGrid)
+
+function resetGrid() {
+ const boxes = document.querySelectorAll('.box')
+ boxes.forEach((box) => {
+  box.style.backgroundColor = '';
+ })
+}
+
+rainbowButton.addEventListener('click', () => {
+  currentMode = rainbow;
+})
+
+function rainbow(box) {
+  box.style.backgroundColor = `hsl(${Math.random() * 360}, 85%, 70%)`;
+
+}
+
+darkenButton.addEventListener('click', () => {
+  currentMode = darken;
+});
+
+
+// Add event listener to darken button
+darkenButton.addEventListener('click', () => {
+  currentMode = darken;
+});
+
+// Function to darken the box color
+function darken(box) {
+  const currentOpacity = parseFloat(box.style.opacity) || 0;
+  const newOpacity = currentOpacity + 0.1;
+  if (currentOpacity < 1) {
+    if (newOpacity <= 0.1) {
+      box.style.opacity = 0.1;
+    } else {
+      box.style.opacity = newOpacity;
+    }
+    const newColor = `rgba(0, 0, 0, ${newOpacity})`;
+    box.style.backgroundColor = newColor;
+  }
+}
+
+
+function resetOpacity() {
+  const boxes = document.querySelectorAll('.box');
+  boxes.forEach((box) => {
+    box.style.opacity = ''; // Reset the opacity to its default value
+  });
+}
+
+
+
+createGrid(4);

@@ -8,9 +8,24 @@
     <script defer src="script.js"></script>
 </head>
 <body>
-    <div id="boxArea">
-
+    <h1>Etch a sketch</h1>
+    <div class="content">
+        <div class="options">
+            <div id="resize">
+                <div class="grid" id="label">Grid Size</div>
+                <input type="range" min="2" max="32" value="32" class="slider">
+                <div class="grid" id="num">32</div>
+            </div>
+            <div class="colorpick">
+                    <label for="colorPicker">Color</label>
+                    <input type="color" id="colorPicker" name="head" value="FFF" />
+            </div>
+            <button id="resetButton">Clear</button>
+            <button id="rainbow">Rainbow</button>
+            <button id="darken">Darken</button>
+        </div>
+        <div id="gridArea" class="box-container" style="--columns: 4;"></div>
     </div>
 
 </body>
-</html>
+</html>     
