@@ -5,8 +5,17 @@ const gridArea = document.getElementById('gridArea')
 const rainbowButton = document.getElementById('rainbow')
 const darkenButton = document.getElementById('darken')
 const colorPickerButton = document.getElementById('colorPicker')
+const sizeInfo = document.getElementById('num')
+const gridOnOff = document.getElementById('gridOnOff')
 
  let currentMode = colorPicker;
+
+ gridOnOff.addEventListener('click', () => {
+  const boxes = document.querySelectorAll('.box');
+  boxes.forEach((box) => {
+    box.classList.toggle('with-border');
+  });
+});
 
  slider.addEventListener('input', () => {
   const gridSize = parseInt(slider.value);
@@ -15,8 +24,12 @@ const colorPickerButton = document.getElementById('colorPicker')
   createGrid(gridSize);
 });
 
+
+
+
 function createGrid(gridSize) {
   gridArea.innerHTML = '';
+  sizeInfo.textContent = gridSize;
   for (let i = 0; i < gridSize * gridSize; i++){
     const box = document.createElement('div');
     box.classList.add('box')
@@ -54,7 +67,7 @@ rainbowButton.addEventListener('click', () => {
 })
 
 function rainbow(box) {
-  box.style.backgroundColor = `hsl(${Math.random() * 360}, 85%, 70%)`;
+  box.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
 
 }
 

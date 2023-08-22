@@ -26,6 +26,9 @@ body {
   flex: 0 0 calc(100% / var(--columns));
   height: calc(100% / var(--columns));
   box-sizing: border-box;
+}
+
+.box.with-border {
   border: 1px solid black;
 }
 
